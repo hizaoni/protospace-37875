@@ -68,3 +68,4 @@ Things you may want to cover:
 - belongs_to : prototype
 - belongs_to : user
 
+
