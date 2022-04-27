@@ -1,5 +1,6 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :move_toppage, only: :edit
 
   def index
     @prototypes = Prototype.all
@@ -61,5 +62,13 @@ class PrototypesController < ApplicationController
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
     
   end
+
+  def move_toppage
+    unless user_signed_in? && current_user.id == params[:prototype_id]
+      redirect_to root_path
+    end
+  end
+    
+
 
 end
