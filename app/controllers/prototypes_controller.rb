@@ -12,8 +12,13 @@ class PrototypesController < ApplicationController
 
   def create
     @prototype = Prototype.new(prototype_params)
-    if @prototype.save
-      redirect_to root_path
+    if @prototype.image.attached?
+      if @prototype.save
+        redirect_to root_path
+      else
+        render :new
+        return
+      end
     else
       render :new
     end
